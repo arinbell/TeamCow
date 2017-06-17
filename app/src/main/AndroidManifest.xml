@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterAccount"></activity>
+        <activity android:name=".HomepageActivity"></activity>
     </application>
 
 </manifest>
