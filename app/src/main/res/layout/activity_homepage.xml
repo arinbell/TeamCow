@@ -10,7 +10,7 @@
         android:id="@+id/logout_button"
         android:layout_width="103dp"
         android:layout_height="58dp"
-        android:text="Button"
+        android:text="Logout"
         tools:layout_editor_absoluteX="276dp"
         tools:layout_editor_absoluteY="4dp" />
 </android.support.constraint.ConstraintLayout>
