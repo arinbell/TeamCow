@@ -13,4 +13,12 @@
         android:text="Logout"
         tools:layout_editor_absoluteX="276dp"
         tools:layout_editor_absoluteY="4dp" />
+
+    <Button
+        android:id="@+id/homepage_item_reg_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register an Item"
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="119dp" />
 </android.support.constraint.ConstraintLayout>
