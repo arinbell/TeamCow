@@ -23,9 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterAccount"></activity>
-        <activity android:name=".HomepageActivity"></activity>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".RegisterAccount" />
+        <activity android:name=".HomepageActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ItemRegActivity"></activity>
     </application>
 
 </manifest>
