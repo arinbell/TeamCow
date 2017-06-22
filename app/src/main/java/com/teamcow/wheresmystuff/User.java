@@ -237,4 +237,17 @@ public class User {
             return false;
         }
     }
+
+    /**
+     * Upgrades anonymous user(visitor) to regular user with provided
+     * user ID and password.
+     *
+     * @param newID ID to be set for this user
+     * @param newPass Password to be set for this user
+     */
+    public void upgradeUser(String newID, String newPass) {
+        userID = newID;
+        password = newPass;
+        userType = UserType.USER;
+    }
 }
