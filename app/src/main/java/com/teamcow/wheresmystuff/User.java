@@ -8,6 +8,54 @@ public class User {
     private String userID;
     private String password;
     private UserType userType;
+    private String zipCode;
+    private String city;
+    private String phoneNumber;
+    private String hashToken;
+
+    /**
+     * Constructor
+     *
+     * Creates new user with provided user data
+     * Hash token is a unique identifiable ID for each users
+     * Not implemented yet, and is to be used for Firebase integration
+     *
+     * @param id User ID of the new user
+     * @param pass Password of the new user
+     * @param userT User type of the new user
+     * @param zipCode Zip code for the new user
+     * @param city City for the new user
+     * @param phoneNumber Phone number for new user
+     * @param hashToken Unique identifiable ID for user, used for Firebase
+     */
+    public User(String id, String pass, UserType userT, String zipCode,
+                String city, String phoneNumber, String hashToken) {
+        this.userID = id;
+        this.password = pass;
+        this.userType = userT;
+        this.zipCode = zipCode;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.hashToken = hashToken;
+    }
+
+    /**
+     * Constructor
+     *
+     * Creates new user with provided user data
+     * Does not included hash token
+     *
+     * @param id User ID of the new user
+     * @param pass Password of the new user
+     * @param userT User type of the new user
+     * @param zipCode Zip code for the new user
+     * @param city City for the new user
+     * @param phoneNumber Phone number for new user
+     */
+    public User(String id, String pass, UserType userT, String zipCode,
+                String city, String phoneNumber) {
+        this(id, pass, userT, zipCode, city, phoneNumber, "");
+    }
 
     /**
      * Constructor
@@ -19,9 +67,7 @@ public class User {
      * @param userT User type of the new user
      */
     public User(String id, String pass, UserType userT) {
-        this.userID = id;
-        this.password = pass;
-        this.userType = userT;
+        this(id, pass, userT, "", "", "");
     }
 
     /**
@@ -54,6 +100,82 @@ public class User {
      */
     public String getUserID() {
         return userID;
+    }
+
+    /**
+     * Returns zip code for this user
+     *
+     * @return This user's zip code
+     */
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    /**
+     * Sets new zip code for this user
+     *
+     * @param newZip New zip code to be set for this user
+     */
+    public void setZipCode(String newZip) {
+        zipCode = newZip;
+    }
+
+    /**
+     * Returns this user's city
+     *
+     * @return This user's city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * Sets new city for this user
+     *
+     * @param newCity New city to be set for this user
+     */
+    public void setCity(String newCity) {
+        city = newCity;
+    }
+
+    /**
+     * Returns this user's phone number
+     *
+     * @return This user's phone number
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * Sets new phone number for this user
+     *
+     * @param newNumber New phone number to be set for this user
+     */
+    public void setPhoneNumber(String newNumber) {
+        phoneNumber = newNumber;
+    }
+
+    /**
+     * Returns hash token for this user
+     *
+     * Not used at the moment
+     *
+     * @return This user's hash token
+     */
+    public String getHashToken() {
+        return hashToken;
+    }
+
+    /**
+     * Sets new hash token for this user
+     *
+     * Not used at the moment
+     *
+     * @param newHash New hash token to be set for this user
+     */
+    public void setHashToken(String newHash) {
+        hashToken = newHash;
     }
 
     /**
