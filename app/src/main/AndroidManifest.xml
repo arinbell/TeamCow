@@ -26,7 +26,8 @@
         <activity android:name=".RegisterAccount" />
         <activity android:name=".HomepageActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ItemRegActivity"></activity>
+        <activity android:name=".ItemRegActivity" />
+        <activity android:name=".ItemSearchActivity"></activity>
     </application>
 
 </manifest>

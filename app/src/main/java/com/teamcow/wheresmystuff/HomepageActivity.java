@@ -14,9 +14,15 @@ public class HomepageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_homepage);
         Button homepageLogoutButton = (Button) findViewById(R.id.logout_button);
         Button homepageItemRegButton = (Button) findViewById(R.id.homepage_item_reg_button);
+        Button homepageItemSearchButton = (Button) findViewById(R.id.homepage_search_button);
         homepageItemRegButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 goToItemRegister();
+            }
+        });
+        homepageItemSearchButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view) {
+                goToItemSearch();
             }
         });
         homepageLogoutButton.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +39,11 @@ public class HomepageActivity extends AppCompatActivity {
 
     private void goToItemRegister() {
         Intent intent = new Intent(HomepageActivity.this, ItemRegActivity.class);
+        startActivity(intent);
+    }
+
+    private void goToItemSearch() {
+        Intent intent = new Intent(HomepageActivity.this, ItemSearchActivity.class);
         startActivity(intent);
     }
 }
