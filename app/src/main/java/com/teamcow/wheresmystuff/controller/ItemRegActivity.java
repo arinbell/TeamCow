@@ -1,4 +1,4 @@
-package com.teamcow.wheresmystuff;
+package com.teamcow.wheresmystuff.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,13 +7,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.teamcow.wheresmystuff.R;
+
 import java.util.ArrayList;
 
 public class ItemRegActivity extends AppCompatActivity {
 
     private EditText itemName;
     private EditText itemDescr;
-    private LostItemDatabase lid;
+    //private LostItemDatabase lid;
     private ListView LostItemList;
 
     @Override
@@ -21,7 +23,7 @@ public class ItemRegActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_reg);
         Button ItemRegButton = (Button) findViewById(R.id.item_reg_button);
-        LostItemList= (ListView) findViewById(R.id.lost_item_list);
+        LostItemList = (ListView) findViewById(R.id.lost_item_list);
         ItemRegButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view) {
                 itemRegistration();
@@ -32,9 +34,10 @@ public class ItemRegActivity extends AppCompatActivity {
     }
 
     public void itemRegistration() {
-        ArrayList<LostItem> item = new ArrayList<LostItem>();
+        /*ArrayList<LostItem> item = new ArrayList<LostItem>();
         LostItemDatabase lostItemD = new LostItemDatabase(this, item);
         LostItemList.setAdapter(lostItemD);
         setContentView(R.layout.activity_homepage);
+        */
     }
 }

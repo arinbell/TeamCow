@@ -1,4 +1,4 @@
-package com.teamcow.wheresmystuff;
+package com.teamcow.wheresmystuff.model;
 
 /**
  * Created by WAnya on 6/21/2017.

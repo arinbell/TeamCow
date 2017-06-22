@@ -1,11 +1,13 @@
-package com.teamcow.wheresmystuff;
+package com.teamcow.wheresmystuff.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.teamcow.wheresmystuff.R;
+
 public class ItemSearchActivity extends AppCompatActivity {
-    private LostItemDatabase lostItemD;
+    //private LostItemDatabase lostItemD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

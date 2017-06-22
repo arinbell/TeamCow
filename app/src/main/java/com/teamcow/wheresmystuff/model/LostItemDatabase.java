@@ -1,4 +1,4 @@
-package com.teamcow.wheresmystuff;
+package com.teamcow.wheresmystuff.model;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.teamcow.wheresmystuff.R;
 
 import org.w3c.dom.Text;
 
