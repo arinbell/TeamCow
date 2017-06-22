@@ -14,4 +14,13 @@ public class LostItem {
         this.name = n;
         this.description = d;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }
+

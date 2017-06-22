@@ -4,8 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class ItemRegActivity extends AppCompatActivity {
+
+    private EditText itemName;
+    private EditText itemDescr;
+    private LostItemDatabase lid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +22,14 @@ public class ItemRegActivity extends AppCompatActivity {
                 itemRegistration();
             }
         });
+        itemName = (EditText) findViewById(R.id.item_name);
+        itemDescr = (EditText) findViewById(R.id.item_description);
     }
 
     public void itemRegistration() {
-
+        String name = itemName.getText().toString();
+        String descr = itemDescr.getText().toString();
+        lid.getItemList().add(new LostItem(name, descr));
+        finish();
     }
 }

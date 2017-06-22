@@ -7,9 +7,9 @@ import java.util.ArrayList;
  */
 
 public class LostItemDatabase {
-    public static ArrayList<LostItem> itemList;
+    private static ArrayList<LostItem> itemList;
 
-    public LostItemDatabase(LostItem i) {
-        itemList.add(i);
+    public ArrayList<LostItem> getItemList() {
+        return itemList;
     }
 }
