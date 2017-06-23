@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "1069302113836",
-    "firebase_url": "https://wheres-my-stuff-5b3d3.firebaseio.com",
-    "project_id": "wheres-my-stuff-5b3d3",
-    "storage_bucket": "wheres-my-stuff-5b3d3.appspot.com"
+    "project_number": "105714022055",
+    "firebase_url": "https://wheresmystuff-7682f.firebaseio.com",
+    "project_id": "wheresmystuff-7682f",
+    "storage_bucket": "wheresmystuff-7682f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1069302113836:android:8d3d19ac063b7c8e",
+        "mobilesdk_app_id": "1:105714022055:android:3502054d9af6bb94",
         "android_client_info": {
-          "package_name": "com.WheresMyStuff.android"
+          "package_name": "com.teamcow.wheresmystuff"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1069302113836-dohh3ab2561v17d3tgdenpuud96obck5.apps.googleusercontent.com",
+          "client_id": "105714022055-1qlfbq43u29a2ummqp1ki7pv6596o99k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.WheresMyStuff.android",
-            "certificate_hash": "d6c42dd4f1bbe27e10b0fcc34b8e8118c768aa06"
+            "package_name": "com.teamcow.wheresmystuff",
+            "certificate_hash": "5ab2ccbae3661b0bc7f411303751fd9144349f5f"
           }
         },
         {
-          "client_id": "1069302113836-gd5dkcukaqsek69ajn25d9444fg7qetm.apps.googleusercontent.com",
+          "client_id": "105714022055-ttbu2ctibu6i6r20sbr1s6e47s073jk0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDbkqAMmgnZYnFpG5FczBg9LQUq7UuoGD0"
+          "current_key": "AIzaSyCy4aZ4TnwL67vH_EYiOjhYrBzUwPp5c24"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1069302113836-gd5dkcukaqsek69ajn25d9444fg7qetm.apps.googleusercontent.com",
+              "client_id": "105714022055-ttbu2ctibu6i6r20sbr1s6e47s073jk0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

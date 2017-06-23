@@ -1,6 +1,9 @@
-package com.teamcow.wheresmystuff;
+package com.teamcow.wheresmystuff.controller;
 
 import android.content.Context;
+
+import com.teamcow.wheresmystuff.model.Users;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
