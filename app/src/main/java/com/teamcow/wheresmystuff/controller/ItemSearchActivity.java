@@ -7,21 +7,23 @@ import android.widget.Button;
 
 import com.teamcow.wheresmystuff.R;
 
-public class ItemRegActivity extends AppCompatActivity {
+public class ItemSearchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_reg);
-        Button itemPostButton = (Button) findViewById(R.id.itemreg_post_button);
-        itemPostButton.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_item_search);
+        Button itemSelectButton = (Button) findViewById(R.id.searchpage_select_button);
+        Button cancelButton = (Button) findViewById(R.id.searchpage_cancel_button);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view) {
-                postItem();
+                cancelSearch();
             }
         });
     }
 
-    public void postItem() {
+    public void cancelSearch() {
         finish();
     }
 }

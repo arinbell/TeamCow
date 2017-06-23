@@ -28,6 +28,11 @@ public class HomepageActivity extends AppCompatActivity {
                 goToItemReg();
             }
         });
+        itemSearchButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view) {
+                goToItemSearch();
+            }
+        });
     }
 
     private void attemptLogout() {
@@ -36,6 +41,11 @@ public class HomepageActivity extends AppCompatActivity {
 
     private void goToItemReg() {
         Intent intent = new Intent(HomepageActivity.this, ItemRegActivity.class);
+        startActivity(intent);
+    }
+
+    private void goToItemSearch() {
+        Intent intent = new Intent(HomepageActivity.this, ItemSearchActivity.class);
         startActivity(intent);
     }
 }
