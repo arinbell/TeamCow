@@ -17,4 +17,8 @@
     <string name="title_activity_welcomepage">WelcomepageActivity</string>
     <string name="hello_round">Hello Round World!</string>
     <string name="hello_square">Hello Square World!</string>
+    <string name="description">Description</string>
+    <string name="item_name">Item Name</string>
+    <string name="search_for_an_item">Search for an item</string>
+    <string name="post_an_item">Post an item</string>
 </resources>
