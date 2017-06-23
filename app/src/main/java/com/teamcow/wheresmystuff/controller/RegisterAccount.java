@@ -1,10 +1,12 @@
-package com.teamcow.wheresmystuff;
+package com.teamcow.wheresmystuff.controller;
 
 import android.app.LoaderManager.LoaderCallbacks;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.content.CursorLoader;
-import static com.teamcow.wheresmystuff.Users.getUsers;
+import static com.teamcow.wheresmystuff.model.Users.getUsers;
+import static com.teamcow.wheresmystuff.model.Users.getUsers;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -19,6 +21,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.teamcow.wheresmystuff.R;
+import com.teamcow.wheresmystuff.model.Users;
+
 import java.util.ArrayList;
 import java.util.List;
 

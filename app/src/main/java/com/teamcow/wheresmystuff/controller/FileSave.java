@@ -1,4 +1,4 @@
-package com.teamcow.wheresmystuff;
+package com.teamcow.wheresmystuff.controller;
 
 import android.content.Context;
 
