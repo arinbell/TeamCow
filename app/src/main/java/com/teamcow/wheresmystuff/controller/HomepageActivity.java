@@ -10,7 +10,6 @@ import com.teamcow.wheresmystuff.R;
 import com.teamcow.wheresmystuff.model.LostItemData;
 
 public class HomepageActivity extends AppCompatActivity {
-    //private LostItemData lid = new LostItemData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
