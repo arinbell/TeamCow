@@ -12,7 +12,7 @@ import com.teamcow.wheresmystuff.model.LostItem;
 import com.teamcow.wheresmystuff.model.LostItemData;
 
 public class ItemRegActivity extends AppCompatActivity {
-    private LostItemData lid;
+    private LostItemData lid = LostItemData.getInstance();
     EditText itemNF;
     EditText itemDF;
 
@@ -21,8 +21,8 @@ public class ItemRegActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_reg);
         Button itemPostButton = (Button) findViewById(R.id.itemreg_post_button);
-        EditText itemNF   = (EditText)findViewById(R.id.item_name_field);
-        EditText itemDF   = (EditText)findViewById(R.id.item_des_field);
+        EditText itemNF = (EditText)findViewById(R.id.item_name_field);
+        EditText itemDF = (EditText)findViewById(R.id.item_des_field);
 
         itemPostButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view) {
@@ -31,8 +31,11 @@ public class ItemRegActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * adds a new item to a preexisting list of items
+     */
     public void postItem() {
-        lid.getInstance().getItemList().add(new LostItem(itemNF.getText().toString(),
+        lid.getItemList().add(new LostItem(itemNF.getText().toString(),
                         itemDF.getText().toString()));
         finish();
     }
