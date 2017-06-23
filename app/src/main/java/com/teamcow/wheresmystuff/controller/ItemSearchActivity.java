@@ -17,7 +17,6 @@ import java.util.List;
 public class ItemSearchActivity extends AppCompatActivity {
     private LostItemData lid = LostItemData.getInstance();
     private ArrayList<LostItem> lostList = lid.getItemList();
-    private ArrayList<String> itemL = new ArrayList<String>();
     private ListView itemDisplay;
 
     @Override
@@ -26,8 +25,7 @@ public class ItemSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_search);
         Button itemSelectButton = (Button) findViewById(R.id.searchpage_search_button);
         Button cancelButton = (Button) findViewById(R.id.searchpage_cancel_button);
-        ListView itemDisplay = (ListView) findViewById(R.id.item_list);
-
+        itemDisplay = (ListView) findViewById(R.id.item_list);
         itemSelectButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view) {
                 itemSearch();
@@ -40,16 +38,16 @@ public class ItemSearchActivity extends AppCompatActivity {
             }
         });
 
+        ArrayList<String> itemList = new ArrayList<String>();
         for(LostItem item : lostList) {
-            itemL.add(item.getName() + ", " + item.getDescription());
+            itemList.add(item.getName());
         }
+        ArrayAdapter<String> itemAdpt = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, itemList);
+        itemDisplay.setAdapter(itemAdpt);
     }
 
     public void itemSearch() {
-        ArrayAdapter<String> arrayAdpt = new ArrayAdapter<String>(this,
-                R.layout.activity_item_search, itemL);
-        itemDisplay.setAdapter(arrayAdpt);
-
     }
 
     public void cancelSearch() {
