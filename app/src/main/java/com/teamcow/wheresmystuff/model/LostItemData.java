@@ -1,5 +1,14 @@
 package com.teamcow.wheresmystuff.model;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.teamcow.wheresmystuff.R;
+
 import java.util.ArrayList;
 
 /**
@@ -8,10 +17,11 @@ import java.util.ArrayList;
 
 public class LostItemData {
     /** Singleton instance */
-    public static final LostItemData lid = new LostItemData();
+    private static final LostItemData lid = new LostItemData();
     public static LostItemData getInstance() {
         return lid;
     }
+
     /** holds the list of all lost items */
     private ArrayList<LostItem> itemList;
 
@@ -32,4 +42,10 @@ public class LostItemData {
     public ArrayList<LostItem> getItemList() {
         return itemList;
     }
+
+    private class ViewHolder {
+        TextView name;
+        TextView des;
+    }
+
 }

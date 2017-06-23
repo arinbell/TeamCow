@@ -6,22 +6,24 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.teamcow.wheresmystuff.R;
 import com.teamcow.wheresmystuff.model.LostItem;
 import com.teamcow.wheresmystuff.model.LostItemData;
 
+
 public class ItemRegActivity extends AppCompatActivity {
     private LostItemData lid = LostItemData.getInstance();
     EditText itemNF;
     EditText itemDF;
+    ListView itemL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_reg);
         Button itemPostButton = (Button) findViewById(R.id.itemreg_post_button);
-
 
         itemPostButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view) {
