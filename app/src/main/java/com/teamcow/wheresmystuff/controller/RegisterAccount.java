@@ -32,6 +32,7 @@ import java.util.List;
 
 public class RegisterAccount extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
+    //UI references
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
@@ -94,6 +95,10 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
         mProgressView = findViewById(R.id.login_progress);
     }
 
+    /**
+     * Attempts the registration by making sure all fields are filled,
+     * and that the fields themselves are valid.
+     */
     private void attemptRegistration() {
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
@@ -136,12 +141,23 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
         }
     }
 
+    /**
+     * Checks to see if the email entered is valid. Really basic right now, will update soon.
+     * @param email is the email entered.
+     * @return true if the email is valid
+     */
     private boolean isEmailValid(String email) {
         return email.contains("@");
     }
 
+    /**
+     * Checks to make sure password is valid. Basic implementation right now,
+     * will update soon.
+     * @param password is the password that was input.
+     * @return true if password is valid
+     */
     private boolean isPasswordValid(String password) {
-        return password.length() > 3;
+        return password.length() > 4;
     }
 
     @Override
@@ -177,6 +193,7 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
         };
 
         int ADDRESS = 0;
+        int IS_PRIMARY = 1;
     }
 
     @Override

@@ -97,6 +97,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }
 
+    /**
+     * populates the AutoComplete with information
+     */
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
@@ -105,6 +108,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         getLoaderManager().initLoader(0, null, this);
     }
 
+    /**
+     * requests permission to access contact information
+     * @return true if permission granted.
+     */
     private boolean mayRequestContacts() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
@@ -167,6 +174,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
+        } else if (!TextUtils.isEmpty(password)) {
+            mPasswordView.setError("Please input a password.");
+            focusView = mPasswordView;
+            cancel = true;
         }
 
         // Check for a valid email address.
@@ -193,11 +204,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Checks to see if the email if valid, will be updated with better logic.
+     * @param email is the inputted email.
+     * @return true if the email is valid
+     */
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
+    /**
+     * Checks to make sure password is valid. Basic implementation right now,
+     * will update soon.
+     * @param password is the password that was input.
+     * @return true if password is valid
+     */
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
