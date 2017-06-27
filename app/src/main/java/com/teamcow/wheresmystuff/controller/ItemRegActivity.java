@@ -12,13 +12,19 @@ import com.teamcow.wheresmystuff.R;
 import com.teamcow.wheresmystuff.model.LostItem;
 import com.teamcow.wheresmystuff.model.LostItemData;
 
-
+/**
+ * A page where users can register items.
+ */
 public class ItemRegActivity extends AppCompatActivity {
     private LostItemData lid = LostItemData.getInstance();
     EditText itemNF;
     EditText itemDF;
     ListView itemL;
 
+    /**
+     * creates a page where users can register items they've found.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

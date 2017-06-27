@@ -8,8 +8,15 @@ import android.widget.Button;
 
 import com.teamcow.wheresmystuff.R;
 
+/**
+ * A launch page that allows users to login or register.
+ */
 public class WelcomepageActivity extends AppCompatActivity {
 
+    /**
+     * creates welcome page
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -14,11 +14,18 @@ import com.teamcow.wheresmystuff.model.LostItemData;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A page where users can search for items.
+ */
 public class ItemSearchActivity extends AppCompatActivity {
     private LostItemData lid = LostItemData.getInstance();
     private ArrayList<LostItem> lostList = lid.getItemList();
     private ListView itemDisplay;
 
+    /**
+     * creates a page where users can search for items that they've lost.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +57,9 @@ public class ItemSearchActivity extends AppCompatActivity {
     public void itemSearch() {
     }
 
+    /**
+     * allows users to stop searching for items.
+     */
     public void cancelSearch() {
         finish();
     }
