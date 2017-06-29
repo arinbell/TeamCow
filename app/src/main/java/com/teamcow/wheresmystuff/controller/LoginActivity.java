@@ -31,6 +31,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.teamcow.wheresmystuff.R;
+import com.teamcow.wheresmystuff.model.User;
+import com.teamcow.wheresmystuff.model.UserDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +60,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
+
+    private static UserDatabase userDatabase = new UserDatabase();
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -336,16 +340,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
+            User u = userDatabase.matchUser(mEmail, mPassword);
+            if (u == null) {
+                return false;
+            } else {
+                return true;
+            }
+            /*for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.
                     return pieces[1].equals(mPassword);
                 }
-            }
+            }*/
 
             // TODO: register the new account here.
-            return true;
+            //return false;
         }
 
         @Override
@@ -357,7 +367,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(new Intent(LoginActivity.this, HomepageActivity.class));
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.setError(getString(R.string.error_incorrect_credential));
                 mPasswordView.requestFocus();
             }
         }

@@ -23,6 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teamcow.wheresmystuff.R;
+import com.teamcow.wheresmystuff.model.User;
+import com.teamcow.wheresmystuff.model.UserDatabase;
+import com.teamcow.wheresmystuff.model.UserType;
 import com.teamcow.wheresmystuff.model.Users;
 
 import java.util.ArrayList;
@@ -40,6 +43,8 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
 
     private boolean selectUser;
     private boolean selectAdmin;
+
+    private static UserDatabase userDatabase = new UserDatabase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,8 +119,10 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
         }
 
         //Check if email is already registered
-        if (Users.check(email)) {
+        if (userDatabase.checkDuplicate(email)) {
             mEmailView.setError("already exists");
+            focusView = mEmailView;
+            cancel = true;
         }
 
 
@@ -134,8 +141,8 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
         if (cancel) {
             focusView.requestFocus();
         } else {
-
-            Users newUser = new Users(email, password, "User");
+            User u = new User(email, password, UserType.USER);
+            userDatabase.addUser(u);
             Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_LONG).show();
             finish();
         }
