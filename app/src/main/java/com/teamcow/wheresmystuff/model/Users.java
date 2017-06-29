@@ -29,7 +29,7 @@ public class Users {
        return false;
    }
 
-   public static ArrayList<Users> getUsers() {
+   public static final ArrayList<Users> getUsers() {
        return userList;
    }
 
@@ -40,7 +40,7 @@ public class Users {
    public String getPassword() {
        return password;
    }
-   
+
    public String getUserType() {
        return userType;
    }

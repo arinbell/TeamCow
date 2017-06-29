@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.teamcow.wheresmystuff.R;
+import com.teamcow.wheresmystuff.model.Users;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private Users user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,6 +178,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
 
+        ArrayList<Users> usersList = user.getUsers();
+
+
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
@@ -187,7 +192,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
 
-        if (cancel) {
+        /*if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
@@ -197,6 +202,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+        }*/
+
+        for (Users item : usersList) {
+            if (item.getUsername() == email) {
+                if (item.getPassword() == password) {
+                    showProgress(true);
+                    mAuthTask = new UserLoginTask(email, password);
+                    mAuthTask.execute((Void) null);
+                }
+            }
         }
     }
 
