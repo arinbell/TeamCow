@@ -11,6 +11,7 @@ public class User {
     private String zipCode;
     private String city;
     private String phoneNumber;
+    private String state;
     private String hashToken;
 
     /**
@@ -26,16 +27,18 @@ public class User {
      * @param zipCode Zip code for the new user
      * @param city City for the new user
      * @param phoneNumber Phone number for new user
+     * @param state for the new user
      * @param hashToken Unique identifiable ID for user, used for Firebase
      */
     public User(String id, String pass, UserType userT, String zipCode,
-                String city, String phoneNumber, String hashToken) {
+                String city, String phoneNumber, String state, String hashToken) {
         this.userID = id;
         this.password = pass;
         this.userType = userT;
         this.zipCode = zipCode;
         this.city = city;
         this.phoneNumber = phoneNumber;
+        this.state = state;
         this.hashToken = hashToken;
     }
 
@@ -51,10 +54,11 @@ public class User {
      * @param zipCode Zip code for the new user
      * @param city City for the new user
      * @param phoneNumber Phone number for new user
+     * @param state State for new user
      */
     public User(String id, String pass, UserType userT, String zipCode,
-                String city, String phoneNumber) {
-        this(id, pass, userT, zipCode, city, phoneNumber, "");
+                String city, String phoneNumber, String state) {
+        this(id, pass, userT, zipCode, city, phoneNumber, state, "");
     }
 
     /**
@@ -155,6 +159,18 @@ public class User {
     public void setPhoneNumber(String newNumber) {
         phoneNumber = newNumber;
     }
+    /**
+     * Returns this user's state
+     *
+     * @return This user's state
+     */
+    public String getState() { return state;}
+    /**
+     * Sets new state for this user
+     *
+     * @param newState New state to be set for this user
+     */
+    public void setState(String newState) { state = newState; }
 
     /**
      * Returns hash token for this user
