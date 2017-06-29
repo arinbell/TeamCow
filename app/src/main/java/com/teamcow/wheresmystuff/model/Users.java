@@ -33,6 +33,17 @@ public class Users {
        return userList;
    }
 
+   public String getUsername() {
+       return username;
+   }
+
+   public String getPassword() {
+       return password;
+   }
+   
+   public String getUserType() {
+       return userType;
+   }
    @Override
    public String toString() {
        return username + " " + password + " " + userType;
