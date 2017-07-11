@@ -27,7 +27,8 @@
         <activity android:name=".controller.HomepageActivity" />
         <activity android:name=".controller.LoginActivity" />
         <activity android:name=".controller.ItemRegActivity" />
-        <activity android:name=".controller.ItemSearchActivity"></activity>
+        <activity android:name=".controller.ItemSearchActivity" />
+        <activity android:name=".controller.SearchResultActivity"></activity>
     </application>
 
 </manifest>

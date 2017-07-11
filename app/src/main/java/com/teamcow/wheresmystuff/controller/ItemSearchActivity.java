@@ -1,10 +1,12 @@
 package com.teamcow.wheresmystuff.controller;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.teamcow.wheresmystuff.R;
@@ -21,6 +23,7 @@ public class ItemSearchActivity extends AppCompatActivity {
     private LostItemData lid = LostItemData.getInstance();
     private ArrayList<LostItem> lostList = lid.getItemList();
     private ListView itemDisplay;
+    private EditText searchBox;
 
     /**
      * creates a page where users can search for items that they've lost.
@@ -32,10 +35,15 @@ public class ItemSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_search);
         Button itemSelectButton = (Button) findViewById(R.id.searchpage_search_button);
         Button cancelButton = (Button) findViewById(R.id.searchpage_cancel_button);
+        searchBox = (EditText) findViewById(R.id.searchTextBox);
         itemDisplay = (ListView) findViewById(R.id.item_list);
+
         itemSelectButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view) {
-                itemSearch();
+                Intent intent = new Intent(ItemSearchActivity.this,
+                        SearchResultActivity.class);
+                intent.putExtra("search_key", searchBox.getText().toString());
+                startActivity(intent);
             }
         });
 
@@ -54,7 +62,8 @@ public class ItemSearchActivity extends AppCompatActivity {
         itemDisplay.setAdapter(itemAdpt);
     }
 
-    public void itemSearch() {
+    public void itemSearch(String string) {
+
     }
 
     /**
