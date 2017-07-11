@@ -63,6 +63,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private static UserDatabase userDatabase = new UserDatabase();
 
+    /**
+     * Current logged in user
+     */
+    private static User currentUser = null;
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -341,6 +350,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             User u = userDatabase.matchUser(mEmail, mPassword);
+            currentUser = u;
             if (u == null) {
                 return false;
             } else {
