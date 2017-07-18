@@ -4,7 +4,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.content.CursorLoader;
-import static com.teamcow.wheresmystuff.model.Users.getUsers;
+
 import static com.teamcow.wheresmystuff.model.Users.getUsers;
 
 import android.net.Uri;
@@ -26,7 +26,6 @@ import com.teamcow.wheresmystuff.R;
 import com.teamcow.wheresmystuff.model.User;
 import com.teamcow.wheresmystuff.model.UserDatabase;
 import com.teamcow.wheresmystuff.model.UserType;
-import com.teamcow.wheresmystuff.model.Users;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +37,6 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
     //UI references
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
 
     private boolean selectUser;
     private boolean selectAdmin;
@@ -58,10 +55,7 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    return true;
-                }
-                return false;
+                return id == R.id.login || id == EditorInfo.IME_NULL;
             }
         });
 
@@ -96,8 +90,8 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
                 selectAdmin = true;
             }
         });
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        View mLoginFormView = findViewById(R.id.login_form);
+        View mProgressView = findViewById(R.id.login_progress);
     }
 
     /**

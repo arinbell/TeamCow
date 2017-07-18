@@ -10,7 +10,7 @@ public class Users {
     private String password;
     private String userType;
 
-    private static ArrayList<Users> userList = new ArrayList<Users>();
+    private static ArrayList<Users> userList = new ArrayList<>();
 
     public Users(String username, String password, String userType) {
         this.username = username;

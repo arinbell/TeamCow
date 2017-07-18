@@ -1,19 +1,8 @@
 package com.teamcow.wheresmystuff.model;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.teamcow.wheresmystuff.R;
-
 import java.util.ArrayList;
-
-/**
- * Created by WAnya on 6/22/2017.
- */
 
 public class LostItemData {
     /** Singleton instance */
@@ -32,7 +21,7 @@ public class LostItemData {
      * make a LostItemData class
      */
     public LostItemData() {
-        itemList = new ArrayList<LostItem>();
+        itemList = new ArrayList<>();
 
     }
     /**

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.teamcow.wheresmystuff.R;
-import com.teamcow.wheresmystuff.model.LostItemData;
 
 /**
  * A page that allows the user to register or search for items
@@ -15,7 +14,7 @@ import com.teamcow.wheresmystuff.model.LostItemData;
 public class HomepageActivity extends AppCompatActivity {
     /**
      * Creates the homepage
-     * @param savedInstanceState
+     * @param savedInstanceState saves the instance state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -17,6 +17,7 @@ import com.teamcow.wheresmystuff.model.PosterType;
 /**
  * A page where users can register items.
  */
+@SuppressWarnings("ALL")
 public class ItemRegActivity extends AppCompatActivity {
     private LostItemData lid = LostItemData.getInstance();
     private EditText itemNF;
@@ -26,7 +27,7 @@ public class ItemRegActivity extends AppCompatActivity {
 
     /**
      * creates a page where users can register items they've found.
-     * @param savedInstanceState
+     * @param savedInstanceState saves the instance state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

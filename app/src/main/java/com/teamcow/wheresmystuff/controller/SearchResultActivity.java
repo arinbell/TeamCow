@@ -29,11 +29,11 @@ public class SearchResultActivity extends AppCompatActivity {
                 matchingList.add(lostItem);
             }
         }
-        ArrayList<String> itemList = new ArrayList<String>();
+        ArrayList<String> itemList = new ArrayList<>();
         for(LostItem item : matchingList) {
             itemList.add(item.getName());
         }
-        ArrayAdapter<String> itemAdpt = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> itemAdpt = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, itemList);
         itemDisplay.setAdapter(itemAdpt);
     }

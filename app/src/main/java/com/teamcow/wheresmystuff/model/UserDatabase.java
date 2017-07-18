@@ -2,12 +2,8 @@ package com.teamcow.wheresmystuff.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by arinb on 6/29/2017.
- */
-
 public class UserDatabase {
-    private static ArrayList<User> userList = new ArrayList<User>();
+    private static ArrayList<User> userList = new ArrayList<>();
 
     public boolean checkDuplicate(String userID) {
         for (User u : userList) {

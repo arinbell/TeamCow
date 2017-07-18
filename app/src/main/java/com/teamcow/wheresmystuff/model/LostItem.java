@@ -20,20 +20,14 @@ public class LostItem {
     // holds the description of item
     private String description;
 
-    // holds the type of item
-    private ItemType type;
-
     // holds the user associated with a given item
     private User user;
-
-    // holds whether the post is lost by user or found by user
-    private PosterType poster;
 
     public LostItem(String name, String des, ItemType type, PosterType poster) {
         this.name = name;
         this.description = des;
-        this.type = type;
-        this.poster = poster;
+        ItemType type1 = type;
+        PosterType poster1 = poster;
     }
 
     /**
