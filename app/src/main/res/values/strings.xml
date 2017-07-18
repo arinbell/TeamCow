@@ -22,4 +22,7 @@
     <string name="item_name_field">Item Name</string>
     <string name="view_map">View Map</string>
     <string name="title_activity_maps">Map</string>
+    <string name="facebook_app_id">154160941805957</string>
+    <string name="fb_login_protocol_scheme">fb154160941805957</string>
+
 </resources>
