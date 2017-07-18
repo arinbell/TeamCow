@@ -23,6 +23,7 @@ public class HomepageActivity extends AppCompatActivity {
         Button homepageLogoutButton = (Button) findViewById(R.id.logout_button);
         Button itemRegButton = (Button) findViewById(R.id.homepage_item_button);
         Button itemSearchButton = (Button) findViewById(R.id.homepage_search_button);
+        Button mapViewButton = (Button) findViewById(R.id.homepage_maps_button);
         homepageLogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,6 +38,11 @@ public class HomepageActivity extends AppCompatActivity {
         itemSearchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view) {
                 goToItemSearch();
+            }
+        });
+        mapViewButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view) {
+                goToMapView();
             }
         });
     }
@@ -61,6 +67,14 @@ public class HomepageActivity extends AppCompatActivity {
      */
     private void goToItemSearch() {
         Intent intent = new Intent(HomepageActivity.this, ItemSearchActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Allows user to look at map.
+     */
+    private void goToMapView() {
+        Intent intent = new Intent(HomepageActivity.this, MapsActivity.class);
         startActivity(intent);
     }
 }

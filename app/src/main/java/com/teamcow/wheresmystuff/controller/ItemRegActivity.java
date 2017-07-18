@@ -22,6 +22,8 @@ public class ItemRegActivity extends AppCompatActivity {
     private LostItemData lid = LostItemData.getInstance();
     private EditText itemNF;
     private EditText itemDF;
+    private EditText itemX;
+    private EditText itemY;
     private Spinner itemTypeSpinner;
     private Spinner posterTypeSpinner;
 
@@ -38,6 +40,8 @@ public class ItemRegActivity extends AppCompatActivity {
         itemDF = (EditText)findViewById(R.id.item_des_field);
         itemTypeSpinner = (Spinner)findViewById(R.id.item_type_spinner);
         posterTypeSpinner = (Spinner)findViewById(R.id.poster_type_spinner);
+        itemX = (EditText)findViewById(R.id.x_coordinate);
+        itemY = (EditText)findViewById(R.id.y_coordinate);
 
         //Set up the adapter to display the item types in the spinner
         ArrayAdapter<String> adapter_1 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
@@ -61,9 +65,25 @@ public class ItemRegActivity extends AppCompatActivity {
      * adds a new item to a preexisting list of items
      */
     public void postItem() {
-        lid.getItemList().add(new LostItem(itemNF.getText().toString(), itemDF.getText().toString(),
-                (ItemType) itemTypeSpinner.getSelectedItem(),
-                (PosterType) posterTypeSpinner.getSelectedItem()));
-        finish();
+        String itemX_string = itemX.getText().toString();
+        String itemY_string = itemY.getText().toString();
+        double itemX_coordinate = Double.parseDouble(itemX_string);
+        double itemY_coordinate = Double.parseDouble(itemY_string);
+
+        if(itemX_string.length() == 0 || itemY_string.length() == 0)
+        {
+            lid.getItemList().add(new LostItem(itemNF.getText().toString(), itemDF.getText().toString(),
+                    (ItemType) itemTypeSpinner.getSelectedItem(),
+                    (PosterType) posterTypeSpinner.getSelectedItem()));
+            finish();
+        }
+        else
+        {
+            lid.getItemList().add(new LostItem(itemNF.getText().toString(), itemDF.getText().toString(),
+                    (ItemType) itemTypeSpinner.getSelectedItem(),
+                    (PosterType) posterTypeSpinner.getSelectedItem(), itemX_coordinate,
+                    itemY_coordinate));
+            finish();
+        }
     }
 }

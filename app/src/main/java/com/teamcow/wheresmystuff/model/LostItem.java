@@ -23,11 +23,33 @@ public class LostItem {
     // holds the user associated with a given item
     private User user;
 
+    // holds the x-coordinate
+    private double x_coord;
+
+    // holds the y-coordinate
+    private double y_coord;
+
+    // holds the item type
+    private ItemType type;
+
+    // holds whether the poster lost or found the item
+    private PosterType poster;
+
     public LostItem(String name, String des, ItemType type, PosterType poster) {
         this.name = name;
         this.description = des;
-        ItemType type1 = type;
-        PosterType poster1 = poster;
+        this.type = type;
+        this.poster = poster;
+    }
+
+    public LostItem(String name, String des, ItemType type, PosterType poster, double x_coord,
+                    double y_coord) {
+        this.name = name;
+        this.description = des;
+        this.type = type;
+        this.poster = poster;
+        this.x_coord = x_coord;
+        this.y_coord = y_coord;
     }
 
     /**
@@ -54,4 +76,19 @@ public class LostItem {
         return user;
     }
 
+    /**
+     * Allows the x_coord of an item to be retrieved
+     * @return the x_coord of an item
+     */
+    public double getX_Coord() {
+        return x_coord;
+    }
+
+    /**
+     * Allows the y_coord of an item to be retrieved
+     * @return the y_coord of an item
+     */
+    public double getY_Coord() {
+        return y_coord;
+    }
 }
