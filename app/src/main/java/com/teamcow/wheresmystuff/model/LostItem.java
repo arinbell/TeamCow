@@ -40,6 +40,8 @@ public class LostItem {
         this.description = des;
         this.type = type;
         this.poster = poster;
+        x_coord = 0;
+        y_coord = 0;
     }
 
     public LostItem(String name, String des, ItemType type, PosterType poster, double x_coord,

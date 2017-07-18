@@ -45,11 +45,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        for (LostItem lostItem : lostList) {
-            LatLng current = new LatLng(lostItem.getX_Coord(), lostItem.getY_Coord());
-            mMap.addMarker(new MarkerOptions().position(current).title(lostItem.getName()).
-                    snippet(lostItem.getDescription()));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(current));
+        if (!lostList.isEmpty()) {
+            for (LostItem lostItem : lostList) {
+                LatLng current = new LatLng(lostItem.getX_Coord(), lostItem.getY_Coord());
+                mMap.addMarker(new MarkerOptions().position(current).title(lostItem.getName()).
+                        snippet(lostItem.getDescription()));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(current));
+            }
         }
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-34, 151);
