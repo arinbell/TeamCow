@@ -10,6 +10,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -29,7 +35,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+//import com.facebook.FacebookSdk;
+//import com.facebook.appevents.AppEventsLogger;
 
+
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.teamcow.wheresmystuff.R;
 import com.teamcow.wheresmystuff.model.User;
 import com.teamcow.wheresmystuff.model.UserDatabase;
@@ -78,15 +89,39 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    LoginButton loginButton;
+    TextView textView;
+    CallbackManager callbackManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
         // Set up the login form.
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        textView = (TextView) findViewById(R.id.textView);
+        callbackManager = CallbackManager.Factory.create();
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                startActivity(new Intent(LoginActivity.this, HomepageActivity.class));
+                textView.setText("Login Successful");
+            }
+
+            @Override
+            public void onCancel() {
+                textView.setText("Login Cancelled");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
-
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -114,6 +149,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * populates the AutoComplete with information
      */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
