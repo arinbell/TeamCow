@@ -60,10 +60,6 @@ public class ItemSearchActivity extends AppCompatActivity {
         itemDisplay.setAdapter(itemAdpt);
     }
 
-    public void itemSearch(String string) {
-
-    }
-
     /**
      * allows users to stop searching for items.
      */

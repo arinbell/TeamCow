@@ -2,6 +2,7 @@ package com.teamcow.wheresmystuff.model;
 
 /**
  * Created by Tony on 7/10/2017.
+ * This class holds enum for the type of poster
  */
 
 public enum PosterType {

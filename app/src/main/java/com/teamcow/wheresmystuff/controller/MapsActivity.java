@@ -19,7 +19,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private LostItemData lid = LostItemData.getInstance();
     private ArrayList<LostItem> lostList = lid.getItemList();
-    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        GoogleMap mMap = googleMap;
 
         if (!lostList.isEmpty()) {
             for (LostItem lostItem : lostList) {

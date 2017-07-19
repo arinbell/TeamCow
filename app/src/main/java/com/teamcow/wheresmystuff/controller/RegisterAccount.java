@@ -90,8 +90,6 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
                 selectAdmin = true;
             }
         });
-        View mLoginFormView = findViewById(R.id.login_form);
-        View mProgressView = findViewById(R.id.login_progress);
     }
 
     /**

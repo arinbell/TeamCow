@@ -2,6 +2,7 @@ package com.teamcow.wheresmystuff.model;
 
 /**
  * Created by arinb on 6/22/2017.
+ * This class holds data for the user objects
  */
 
 public class User {

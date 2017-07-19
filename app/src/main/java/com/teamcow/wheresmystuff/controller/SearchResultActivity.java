@@ -25,7 +25,7 @@ public class SearchResultActivity extends AppCompatActivity {
         String searchKey = intent.getStringExtra("search_key");
         ListView itemDisplay = (ListView) findViewById(R.id.resultView);
         for (LostItem lostItem : lostList) {
-            if (searchKey.equals(lostItem.getName().toString())) {
+            if (searchKey.equals(lostItem.getName())) {
                 matchingList.add(lostItem);
             }
         }
