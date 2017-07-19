@@ -17,6 +17,7 @@ import org.junit.Test;
  * Framing Conditions: Nothing is modified
  */
 public class checkDuplicateUser {
+    
     @Test
     public void checkDuplicate() throws Exception {
         User user = new User("user", "pass", UserType.USER);
