@@ -24,7 +24,7 @@ public class UserDatabase {
         return true;
     }
 
-    public boolean addUser(User user) {
+    public static boolean addUser(User user) {
         for (User u : userList) {
             if (u.getUserID().equals(user.getUserID())) {
                 return false;
@@ -43,5 +43,14 @@ public class UserDatabase {
             }
         }
         return null;
+    }
+
+
+    /**
+     * Allows the list of users to be retrieved
+     * @return the list of users
+     */
+    public ArrayList<User> getUserList() {
+        return userList;
     }
 }
