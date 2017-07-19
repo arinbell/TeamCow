@@ -3,7 +3,7 @@ package com.teamcow.wheresmystuff;
 import com.teamcow.wheresmystuff.model.User;
 import com.teamcow.wheresmystuff.model.UserDatabase;
 import com.teamcow.wheresmystuff.model.UserType;
-import junit.framework.Assert.*;
+import junit.framework.Assert;
 import org.junit.Test;
 
 /**
