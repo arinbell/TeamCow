@@ -6,6 +6,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,6 +20,10 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     private LostItem lostItem;
 
+    private FloatingActionButton fab;
+    private TextView desTextView;
+    private Button mapViewButton;
+
 
     private final String INTENT_ITEM = "item_to_view";
 
@@ -28,7 +34,10 @@ public class ItemDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        desTextView = (TextView) findViewById(R.id.description_textview);
+        mapViewButton = (Button) findViewById(R.id.view_map_button);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab_edit);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,18 +51,19 @@ public class ItemDetailActivity extends AppCompatActivity {
         if (getIntent().hasExtra(INTENT_ITEM)) {
             lostItem = getIntent().getParcelableExtra(INTENT_ITEM);
             if (lostItem != null) {
-
+                fillDisplay();
             }
         }
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (lostItem.getUser().equals(user.getUid())) {
-            findViewById(R.id.fab).setEnabled(true);
-            findViewById(R.id.fab).setVisibility(View.VISIBLE);
+            findViewById(R.id.fab_edit).setEnabled(true);
+            findViewById(R.id.fab_edit).setVisibility(View.VISIBLE);
         } else {
-            findViewById(R.id.fab).setEnabled(false);
-            findViewById(R.id.fab).setVisibility(View.INVISIBLE);
+            findViewById(R.id.fab_edit).setEnabled(false);
+            findViewById(R.id.fab_edit).setVisibility(View.INVISIBLE);
         }
+    }
 
-
+    private void fillDisplay() {
     }
 }
