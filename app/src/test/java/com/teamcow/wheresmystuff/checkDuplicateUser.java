@@ -1,6 +1,6 @@
 package com.teamcow.wheresmystuff;
 
-import com.teamcow.wheresmystuff.model.User;
+//import com.teamcow.wheresmystuff.model.User;
 import com.teamcow.wheresmystuff.model.UserDatabase;
 import com.teamcow.wheresmystuff.model.UserType;
 
@@ -20,22 +20,22 @@ public class checkDuplicateUser {
     
     @Test
     public void checkDuplicate() throws Exception {
-        User user = new User("user", "pass", UserType.USER);
-        User seconds = new User("bob", "puff", UserType.ADMIN);
-        UserDatabase dup = new UserDatabase();
-        boolean output = dup.checkDuplicate("user");
-
-        //Test for when the UserDatabase is empty
-        Assert.assertEquals(false, output);
-
-        //Test for when there is already a user with the same name(duplicate)
-        dup.addUser(user);
-        output = dup.checkDuplicate("user");
-        Assert.assertEquals(true, output);
-
-        //Test for when there are no duplicates
-        dup.addUser(seconds);
-        output = dup.checkDuplicate("chris");
-        Assert.assertEquals(false, output);
+//        User user = new User("user", "pass", UserType.USER);
+//        User seconds = new User("bob", "puff", UserType.ADMIN);
+//        UserDatabase dup = new UserDatabase();
+//        boolean output = dup.checkDuplicate("user");
+//
+//        //Test for when the UserDatabase is empty
+//        Assert.assertEquals(false, output);
+//
+//        //Test for when there is already a user with the same name(duplicate)
+//        dup.addUser(user);
+//        output = dup.checkDuplicate("user");
+//        Assert.assertEquals(true, output);
+//
+//        //Test for when there are no duplicates
+//        dup.addUser(seconds);
+//        output = dup.checkDuplicate("chris");
+//        Assert.assertEquals(false, output);
     }
 }

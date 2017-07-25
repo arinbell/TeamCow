@@ -2,6 +2,7 @@ package com.teamcow.wheresmystuff.controller;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,16 +43,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        GoogleMap mMap = googleMap;
 
-        if (!lostList.isEmpty()) {
-            for (LostItem lostItem : lostList) {
-                LatLng current = new LatLng(lostItem.getX_Coord(), lostItem.getY_Coord());
-                mMap.addMarker(new MarkerOptions().position(current).title(lostItem.getName()).
-                        snippet(lostItem.getDescription()));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(current));
-            }
-        }
+        // Add a marker in Sydney, Australia,
+        // and move the map's camera to the same location.
+        LatLng sydney = new LatLng(-33.852, 151.211);
+        googleMap.addMarker(new MarkerOptions().position(sydney)
+                .title("Marker in Sydney"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+//        if (!lostList.isEmpty()) {
+//            for (LostItem lostItem : lostList) {
+//                LatLng current = new LatLng(lostItem.getX_Coord(), lostItem.getY_Coord());
+//                mMap.addMarker(new MarkerOptions().position(current).title(lostItem.getName()).
+//                        snippet(lostItem.getDescription()));
+//                mMap.moveCamera(CameraUpdateFactory.newLatLng(current));
+//            }
+//        }
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-34, 151);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));

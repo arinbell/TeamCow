@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,8 +31,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.teamcow.wheresmystuff.R;
-import com.teamcow.wheresmystuff.model.User;
+import com.teamcow.wheresmystuff.model.LocalUser;
 import com.teamcow.wheresmystuff.model.UserDatabase;
 
 import java.util.ArrayList;
@@ -57,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+    private static final String TAG = "Where'sMyStuff";
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -67,9 +71,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * Current logged in user
      */
-    private static User currentUser = null;
+    private static LocalUser currentUser = null;
 
-    public static User getCurrentUser() {
+    public static LocalUser getCurrentUser() {
         return currentUser;
     }
 
@@ -78,6 +82,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +92,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Log.d(TAG, "Signed in: " + user.getUid());
+                } else {
+                    Log.d(TAG, "Currently Signed Out");
+                }
+            }
+        };
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -109,6 +127,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     /**
@@ -343,9 +375,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            User u = userDatabase.matchUser(mEmail, mPassword);
-            currentUser = u;
-            return u != null;
+            //User u = userDatabase.matchUser(mEmail, mPassword);
+            //currentUser = u;
+            //return u != null;
+            return false;
             /*for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail)) {

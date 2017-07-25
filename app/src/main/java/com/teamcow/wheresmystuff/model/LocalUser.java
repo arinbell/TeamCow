@@ -1,18 +1,35 @@
 package com.teamcow.wheresmystuff.model;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 /**
  * Created by arinb on 6/22/2017.
  * This class holds data for the user objects
  */
 
-public class User {
+public class LocalUser {
     private String userID;
-    private String password;
+    private String nickname;
+    private String email;
     private UserType userType;
     private String zipCode;
     private String city;
     private String phoneNumber;
     private String hashToken;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+    private String signinProvider;
+    private String idToken;
+
+    public LocalUser (FirebaseUser firebaseUser) {
+        this.firebaseUser = firebaseUser;
+        userID = firebaseUser.getUid();
+        signinProvider = firebaseUser.getProviderId();
+        nickname = firebaseUser.getDisplayName();
+        email = firebaseUser.getEmail();
+        phoneNumber = firebaseUser.getPhoneNumber();
+    }
 
     /**
      * Constructor
@@ -29,7 +46,7 @@ public class User {
      * @param phoneNumber Phone number for new user
      * @param hashToken Unique identifiable ID for user, used for Firebase
      */
-    public User(String id, String pass, UserType userT, String zipCode,
+/*    public User(String id, String pass, UserType userT, String zipCode,
                 String city, String phoneNumber, String hashToken) {
         this.userID = id;
         this.password = pass;
@@ -38,7 +55,7 @@ public class User {
         this.city = city;
         this.phoneNumber = phoneNumber;
         this.hashToken = hashToken;
-    }
+    }*/
 
     /**
      * Constructor
@@ -53,10 +70,10 @@ public class User {
      * @param city City for the new user
      * @param phoneNumber Phone number for new user
      */
-    public User(String id, String pass, UserType userT, String zipCode,
+/*    public User(String id, String pass, UserType userT, String zipCode,
                 String city, String phoneNumber) {
         this(id, pass, userT, zipCode, city, phoneNumber, "");
-    }
+    }*/
 
     /**
      * Constructor
@@ -67,9 +84,9 @@ public class User {
      * @param pass Password of the new user
      * @param userT User type of the new user
      */
-    public User(String id, String pass, UserType userT) {
+/*    public User(String id, String pass, UserType userT) {
         this(id, pass, userT, "", "", "");
-    }
+    }*/
 
     /**
      * Constructor
@@ -80,9 +97,9 @@ public class User {
      * @param id User ID of the new user
      * @param pass Password of the new user
      */
-    public User(String id, String pass) {
-        this(id, pass, UserType.USER);
-    }
+//    public User(String id, String pass) {
+//        this(id, pass, UserType.USER);
+//    }
 
     /**
      * Default Constructor
@@ -90,72 +107,72 @@ public class User {
      * If no parameter is passed in, a new anonymous user is
      * created. (Visitor account)
      */
-    public User() {
-        this("anonymous", "password", UserType.ANONYMOUS);
-    }
+//    public User() {
+//        this("anonymous", "password", UserType.ANONYMOUS);
+//    }
 
     /**
      * Returns user ID of this user
      *
      * @return This user's user ID
      */
-    public String getUserID() {
-        return userID;
-    }
+//    public String getUserID() {
+//        return userID;
+//    }
 
     /**
      * Returns zip code for this user
      *
      * @return This user's zip code
      */
-    public String getZipCode() {
-        return zipCode;
-    }
+//    public String getZipCode() {
+//        return zipCode;
+//    }
 
     /**
      * Sets new zip code for this user
      *
      * @param newZip New zip code to be set for this user
      */
-    public void setZipCode(String newZip) {
-        zipCode = newZip;
-    }
+//    public void setZipCode(String newZip) {
+//        zipCode = newZip;
+//    }
 
     /**
      * Returns this user's city
      *
      * @return This user's city
      */
-    public String getCity() {
-        return city;
-    }
+//    public String getCity() {
+//        return city;
+//    }
 
     /**
      * Sets new city for this user
      *
      * @param newCity New city to be set for this user
      */
-    public void setCity(String newCity) {
-        city = newCity;
-    }
+//    public void setCity(String newCity) {
+//        city = newCity;
+//    }
 
     /**
      * Returns this user's phone number
      *
      * @return This user's phone number
      */
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+//    public String getPhoneNumber() {
+//        return phoneNumber;
+//    }
 
     /**
      * Sets new phone number for this user
      *
      * @param newNumber New phone number to be set for this user
      */
-    public void setPhoneNumber(String newNumber) {
-        phoneNumber = newNumber;
-    }
+//    public void setPhoneNumber(String newNumber) {
+//        phoneNumber = newNumber;
+//    }
 
     /**
      * Returns hash token for this user
@@ -164,9 +181,9 @@ public class User {
      *
      * @return This user's hash token
      */
-    public String getHashToken() {
-        return hashToken;
-    }
+//    public String getHashToken() {
+//        return hashToken;
+//    }
 
     /**
      * Sets new hash token for this user
@@ -175,9 +192,9 @@ public class User {
      *
      * @param newHash New hash token to be set for this user
      */
-    public void setHashToken(String newHash) {
-        hashToken = newHash;
-    }
+//    public void setHashToken(String newHash) {
+//        hashToken = newHash;
+//    }
 
     /**
      * Checks if passed in string matches the password of this user
@@ -185,9 +202,9 @@ public class User {
      * @param pass String to be checked against this user's password
      * @return Whether string matches or not
      */
-    public boolean matchPassword(String pass) {
-        return (pass.equals(password));
-    }
+//    public boolean matchPassword(String pass) {
+//        return (pass.equals(password));
+//    }
 
     /**
      * Checks if passed in string matches the user ID of this user
@@ -195,9 +212,9 @@ public class User {
      * @param id String to be checked against this user's ID
      * @return Whether string matches or not
      */
-    public boolean matchUserID(String id) {
-        return (id.equals(userID));
-    }
+//    public boolean matchUserID(String id) {
+//        return (id.equals(userID));
+//    }
 
     /**
      * Returns the user type of this user
@@ -215,9 +232,9 @@ public class User {
      *
      * @param newPass new password to be set
      */
-    public void setPassword(String newPass) {
-        password = newPass;
-    }
+//    public void setPassword(String newPass) {
+//        password = newPass;
+//    }
 
     /**
      * Sets the user type for this user.
@@ -230,7 +247,7 @@ public class User {
      * @param newUT UserType being set for this user
      * @return Whether user type was successfully set or not
      */
-    public boolean setUserType(User admin, UserType newUT) {
+    public boolean setUserType(LocalUser admin, UserType newUT) {
         if (admin.getUserType().equals(UserType.ADMIN)) {
             userType = newUT;
             return true;
@@ -246,9 +263,9 @@ public class User {
      * @param newID ID to be set for this user
      * @param newPass Password to be set for this user
      */
-    public void upgradeUser(String newID, String newPass) {
+/*    public void upgradeUser(String newID, String newPass) {
         userID = newID;
         password = newPass;
         userType = UserType.USER;
-    }
+    }*/
 }

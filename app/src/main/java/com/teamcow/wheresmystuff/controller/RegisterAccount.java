@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teamcow.wheresmystuff.R;
-import com.teamcow.wheresmystuff.model.User;
+import com.teamcow.wheresmystuff.model.LocalUser;
 import com.teamcow.wheresmystuff.model.UserDatabase;
 import com.teamcow.wheresmystuff.model.UserType;
 
@@ -111,11 +111,11 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
         }
 
         //Check if email is already registered
-        if (userDatabase.checkDuplicate(email)) {
-            mEmailView.setError("already exists");
-            focusView = mEmailView;
-            cancel = true;
-        }
+//        if (userDatabase.checkDuplicate(email)) {
+//            mEmailView.setError("already exists");
+//            focusView = mEmailView;
+//            cancel = true;
+//        }
 
 
         // Check for a valid email address.
@@ -130,14 +130,14 @@ public class RegisterAccount extends AppCompatActivity implements LoaderCallback
             cancel = true;
         }
 
-        if (cancel) {
-            focusView.requestFocus();
-        } else {
-            User u = new User(email, password, UserType.USER);
-            userDatabase.addUser(u);
-            Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_LONG).show();
-            finish();
-        }
+//        if (cancel) {
+//            focusView.requestFocus();
+//        } else {
+//            User u = new User(email, password, UserType.USER);
+//            userDatabase.addUser(u);
+//            Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_LONG).show();
+//            finish();
+//        }
     }
 
     /**
