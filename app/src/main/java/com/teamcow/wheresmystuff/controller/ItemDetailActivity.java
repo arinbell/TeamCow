@@ -18,6 +18,9 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     private LostItem lostItem;
 
+
+    private final String INTENT_ITEM = "item_to_view";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,13 @@ public class ItemDetailActivity extends AppCompatActivity {
         });
 
         //lostItem = new LostItem("", "", "", "", 0, 0, ItemType.ELECTRONIC, PosterType.FINDER, );
+
+        if (getIntent().hasExtra(INTENT_ITEM)) {
+            lostItem = getIntent().getParcelableExtra(INTENT_ITEM);
+            if (lostItem != null) {
+
+            }
+        }
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (lostItem.getUser().equals(user.getUid())) {
             findViewById(R.id.fab).setEnabled(true);
