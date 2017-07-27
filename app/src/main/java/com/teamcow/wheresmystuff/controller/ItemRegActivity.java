@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.provider.MediaStore;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
@@ -58,7 +61,7 @@ import java.util.Date;
  * A page where users can register items.
  */
 @SuppressWarnings("ALL")
-public class ItemRegActivity extends AppCompatActivity implements OnMapReadyCallback{
+public class ItemRegActivity extends AppCompatActivity {
     private LostItemData lid = LostItemData.getInstance();
     private EditText itemNF;
     private EditText itemDF;
@@ -77,14 +80,10 @@ public class ItemRegActivity extends AppCompatActivity implements OnMapReadyCall
     private double y_coord;
     private boolean uriChanged = false;
 
-    private GoogleMap mMap;
-    private MapView mapView;
-    private Marker mapMarker;
-
     private final int REQUEST_CODE_PLACEPICKER = 1;
     private final int REQUEST_PICK_IMAGE = 2;
     private final int REQUEST_CAPTURE_IMAGE = 3;
-    private final String INTENT_EDIT = "editing";
+    private final String INTENT_EDIT = "item_to_view";
     private final String INTENT_EDIT_ITEM = "lostitem";
 
     private DatabaseReference mDatabase;
@@ -106,8 +105,6 @@ public class ItemRegActivity extends AppCompatActivity implements OnMapReadyCall
         itemTypeSpinner = (Spinner)findViewById(R.id.item_type_spinner);
         posterTypeSpinner = (Spinner)findViewById(R.id.poster_type_spinner);
         imageView = (ImageView) findViewById(R.id.item_reg_imageView);
-        mapView = (MapView) findViewById(R.id.mapView);
-        mapView.getMapAsync(this);
 
 
         itemLocText = (EditText)findViewById(R.id.address_field);
@@ -126,40 +123,51 @@ public class ItemRegActivity extends AppCompatActivity implements OnMapReadyCall
         posterTypeSpinner.setAdapter(adapter_2);
 
         if (getIntent().hasExtra(INTENT_EDIT)) {
-            editing = getIntent().getBooleanExtra(INTENT_EDIT, false);
-            if (editing) {
-                lostItem = getIntent().getParcelableExtra(INTENT_EDIT_ITEM);
-                if (lostItem.getUri() != null) {
-                    uri = Uri.parse(lostItem.getUri());
-                }
-                itemNF.setText(lostItem.getName());
-                itemDF.setText(lostItem.getDescription());
-                x_coord = lostItem.getX_coord();
-                y_coord = lostItem.getY_coord();
-                itemLocText.setText(x_coord + ", " + y_coord);
-                itemTypeSpinner.setSelection(LostItem.findPosition(lostItem.getType().toString()));
-                if (lostItem.getPoster().toString().equals("Finder")) {
-                    posterTypeSpinner.setSelection(0);
-                } else {
-                    posterTypeSpinner.setSelection(1);
-                }
+            editing = true;
+            lostItem = (LostItem) getIntent().getParcelableExtra(INTENT_EDIT);
+            if (lostItem.getUri() != null) {
+                uri = Uri.parse(lostItem.getUri());
+            }
+            itemNF.setText(lostItem.getName());
+            itemDF.setText(lostItem.getDescription());
+            x_coord = lostItem.getX_coord();
+            y_coord = lostItem.getY_coord();
+            itemLocText.setText(x_coord + ", " + y_coord);
+            itemTypeSpinner.setSelection(LostItem.findPosition(lostItem.getType().toString()));
+            if (lostItem.getPoster().toString().equals("Finder")) {
+                posterTypeSpinner.setSelection(0);
+            } else {
+                posterTypeSpinner.setSelection(1);
             }
         }
 
         Uri defaultImage;
         if (uri == null) {
             defaultImage = Uri.parse("android.resource://com.teamcow.wheresmystuff/drawable/logo_black_720.png");
-        } else {
-            defaultImage = uri;
-        }
-        try {
-            InputStream inputStream = getContentResolver().openInputStream(defaultImage);
-            itemImage = Drawable.createFromStream(inputStream, defaultImage.toString() );
-        } catch (FileNotFoundException e) {
-            itemImage = getResources().getDrawable(R.drawable.logo_black_720);
-        }
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(defaultImage);
+                itemImage = Drawable.createFromStream(inputStream, defaultImage.toString() );
+            } catch (FileNotFoundException e) {
+                itemImage = getResources().getDrawable(R.drawable.logo_black_720, null);
+            }
 
-        imageView.setImageDrawable(itemImage);
+            imageView.setImageDrawable(itemImage);
+        } else {
+            StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(uri.toString());
+
+            Glide.with(this)
+                    .using(new FirebaseImageLoader())
+                    .load(storageReference)
+                    .into(imageView);
+        }
+//        try {
+//            InputStream inputStream = getContentResolver().openInputStream(defaultImage);
+//            itemImage = Drawable.createFromStream(inputStream, defaultImage.toString() );
+//        } catch (FileNotFoundException e) {
+//            itemImage = getResources().getDrawable(R.drawable.logo_black_720, null);
+//        }
+//
+//        imageView.setImageDrawable(itemImage);
 
 
 
@@ -190,32 +198,6 @@ public class ItemRegActivity extends AppCompatActivity implements OnMapReadyCall
                 dispatchTakePictureIntent();
             }
         });
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        showMarker();
-    }
-
-
-    private void showMarker() {
-
-        if (itemLocation == null) {
-            mapMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("No where"));
-        } else {
-            if (mapMarker == null) {
-                mapMarker = mMap.addMarker(
-                        new MarkerOptions()
-                        .position(itemLocation.getLatLng())
-                        .title("Location")
-                );
-            } else {
-                mapMarker.setPosition(itemLocation.getLatLng());
-            }
-        }
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mapMarker.getPosition()));
     }
 
     /**
@@ -388,7 +370,6 @@ public class ItemRegActivity extends AppCompatActivity implements OnMapReadyCall
         if (name == null && address == null) {
             itemLocText.setText(x_coord + ", " + y_coord);
         }
-        showMarker();
     }
 
     private void selectImage() {

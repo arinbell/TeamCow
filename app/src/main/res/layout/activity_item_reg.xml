@@ -55,11 +55,13 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <com.google.android.gms.maps.MapView
-                    android:id="@+id/mapView"
-                    android:layout_width="190dp"
-                    android:layout_height="117dp"
-                    android:layout_weight="1" />
+                <EditText
+                    android:id="@+id/address_field"
+                    android:layout_width="263dp"
+                    android:layout_height="116dp"
+                    android:ems="10"
+                    android:hint="Address"
+                    android:inputType="none" />
 
                 <Button
                     android:id="@+id/address_button"
@@ -140,14 +142,6 @@
                     android:layout_weight="1"
                     android:text="Cancel" />
             </LinearLayout>
-
-            <EditText
-                android:id="@+id/address_field"
-                android:layout_width="match_parent"
-                android:layout_height="116dp"
-                android:ems="10"
-                android:hint="Address"
-                android:inputType="none" />
 
         </LinearLayout>
     </ScrollView>

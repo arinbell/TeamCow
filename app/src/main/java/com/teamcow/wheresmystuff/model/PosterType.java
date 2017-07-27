@@ -15,6 +15,15 @@ public enum PosterType {
         this.posterType = posterType;
     }
 
+    public static boolean contains(String test) {
+        for (PosterType i : PosterType.values()) {
+            if (i.name().equals(test)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String toString(){
         return posterType;
     }

@@ -17,6 +17,15 @@ public enum ItemType {
         this.itemType = itemType;
     }
 
+    public static boolean contains(String test) {
+        for (ItemType i : ItemType.values()) {
+           if (i.name().equals(test)) {
+               return true;
+           }
+        }
+        return false;
+    }
+
     public String toString(){
         return itemType;
     }

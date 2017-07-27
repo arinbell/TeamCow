@@ -39,7 +39,14 @@
         <activity android:name=".controller.HomepageActivity" />
         <activity android:name=".controller.LoginActivity" />
         <activity android:name=".controller.ItemRegActivity" />
-        <activity android:name=".controller.ItemSearchActivity" />
+        <activity android:name=".controller.ItemSearchActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
         <activity android:name=".controller.SearchResultActivity" />
         <provider
             android:name="android.support.v4.content.FileProvider"

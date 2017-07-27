@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.widget.Button;
 
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,6 +51,7 @@ public class WelcomepageActivity extends AppCompatActivity {
         if (user != null) {
             Intent intent = new Intent(WelcomepageActivity.this, HomepageActivity.class);
             startActivity(intent);
+            finish();
         }
 
         Button advanceToLogin = (Button) findViewById(R.id.login);
@@ -68,6 +70,7 @@ public class WelcomepageActivity extends AppCompatActivity {
                                         new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build()))
                             .setLogo(R.drawable.wheres_my_stuff_logo_black_720)
                             .setIsSmartLockEnabled(false)
+                            .setLogo(R.drawable.logo_black_720)
                             .build(),
                         RC_SIGN_IN);
 
@@ -91,28 +94,47 @@ public class WelcomepageActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
-            handleSignInResponse(resultCode, data);
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+            handleSignInResponse(resultCode, data, response);
             return;
         }
     }
 
-    private void handleSignInResponse(int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-//            LocalUser user = new LocalUser(FirebaseAuth.getInstance().getCurrentUser());
-//            SharedPreferences mPrefs = getSharedPreferences(GLOBAL_PREFS, MODE_PRIVATE);
-//            SharedPreferences.Editor pEditor = mPrefs.edit();
-//            Gson gson = new Gson();
-//            String json = gson.toJson(user);
-//            pEditor.putString("UserData", json);
-//            pEditor.commit();
+    private void handleSignInResponse(int resultCode, Intent data, IdpResponse response) {
+
+        if (resultCode == ResultCodes.OK) {
             startActivity(HomepageActivity.createIntent(this, IdpResponse.fromResultIntent(data)));
             finish();
             return;
+        } else {
+            if (response == null) {
+                Snackbar.make(findViewById(R.id.login), "Sign in cancelled", Snackbar.LENGTH_LONG).show();
+                return;
+            }
+            if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
+                Snackbar.make(findViewById(R.id.login), "No Internet connection", Snackbar.LENGTH_LONG).show();
+                return;
+            }
+            Snackbar.make(findViewById(R.id.login), "Unknown error occured", Snackbar.LENGTH_LONG).show();
         }
-        if (resultCode == RESULT_CANCELED) {
-            Snackbar.make(findViewById(R.id.login), "Sign in cancelled", Snackbar.LENGTH_LONG).show();
-            return;
-        }
-        Snackbar.make(findViewById(R.id.login), "Login failed", Snackbar.LENGTH_LONG).show();
+
+
+//        if (resultCode == RESULT_OK) {
+////            LocalUser user = new LocalUser(FirebaseAuth.getInstance().getCurrentUser());
+////            SharedPreferences mPrefs = getSharedPreferences(GLOBAL_PREFS, MODE_PRIVATE);
+////            SharedPreferences.Editor pEditor = mPrefs.edit();
+////            Gson gson = new Gson();
+////            String json = gson.toJson(user);
+////            pEditor.putString("UserData", json);
+////            pEditor.commit();
+//            startActivity(HomepageActivity.createIntent(this, IdpResponse.fromResultIntent(data)));
+//            finish();
+//            return;
+//        }
+//        if (resultCode == RESULT_CANCELED) {
+//            Snackbar.make(findViewById(R.id.login), "Sign in cancelled", Snackbar.LENGTH_LONG).show();
+//            return;
+//        }
+//        Snackbar.make(findViewById(R.id.login), "Login failed", Snackbar.LENGTH_LONG).show();
     }
 }

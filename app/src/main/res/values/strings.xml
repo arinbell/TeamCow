@@ -13,6 +13,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="facebook_application_id" translatable="false">1861973797385553</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb1861973797385553</string>
+    <string name="twitter_consumer_key" translatable="false">90TOXVmHgPmK0BupKjZd4RVcx </string>
+    <string name="twitter_consumer_secret" translatable="false">s9159vWy44oFpJeogBg0hXexMVg4RifAhmwQAfkelVCRgOBd3d</string>
     <string name="description">Description</string>
     <string name="x_coord">X - Coord</string>
     <string name="y_coord">Y - Coord</string>
@@ -116,4 +120,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search Postings</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,7 +14,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.teamcow.wheresmystuff.R;
+import com.teamcow.wheresmystuff.model.ItemType;
 import com.teamcow.wheresmystuff.model.LocalUser;
+import com.teamcow.wheresmystuff.model.LostItem;
+import com.teamcow.wheresmystuff.model.LostItemData;
+import com.teamcow.wheresmystuff.model.PosterType;
 
 /**
  * A page that allows the user to register or search for items
@@ -24,6 +29,8 @@ public class HomepageActivity extends AppCompatActivity {
      * @param savedInstanceState saves the instance state
      */
 
+    private static LostItemData lid = LostItemData.getInstance();
+    private final int SIGNOUT_CODE = 666;
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
@@ -71,6 +78,8 @@ public class HomepageActivity extends AppCompatActivity {
     private void attemptLogout() {
         FirebaseAuth.getInstance().signOut();
         finish();
+        Intent intent = new Intent(HomepageActivity.this, WelcomepageActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -93,8 +102,11 @@ public class HomepageActivity extends AppCompatActivity {
      * Allows user to look at map.
      */
     private void goToMapView() {
+        //Intent intent = new Intent(HomepageActivity.this, MapsActivity.class);
+        //startActivity(intent);
         Intent intent = new Intent(HomepageActivity.this, MapsActivity.class);
         startActivity(intent);
+
     }
 
     @Override
