@@ -149,6 +149,7 @@ public class ItemSearchActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             handleSearch(query);
+            Log.d("WHY ISN'T IT WORKING", "OMGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         } else {
             showList = lostList;
         }
@@ -440,8 +441,8 @@ public class ItemSearchActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         refresh();
     }
 
