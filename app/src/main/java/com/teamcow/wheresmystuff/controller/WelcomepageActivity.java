@@ -79,15 +79,15 @@ public class WelcomepageActivity extends AppCompatActivity {
             }
         });
 
-        Button advanceToRegister = (Button) findViewById(R.id.register);
-        advanceToRegister.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(WelcomepageActivity.this, RegisterAccount.class);
-                startActivity(intent);
-            }
-        });
+//        Button advanceToRegister = (Button) findViewById(R.id.register);
+//        advanceToRegister.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(WelcomepageActivity.this, RegisterAccount.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override

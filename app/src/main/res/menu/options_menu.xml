@@ -6,4 +6,8 @@
         android:icon="@drawable/ic_search_black_24dp"
         app:showAsAction="collapseActionView|ifRoom"
         app:actionViewClass="android.widget.SearchView" />
+    <item
+        android:id="@+id/menu_refresh"
+        app:showAsAction="never"
+        android:title="@string/menu_refresh"/>
 </menu>

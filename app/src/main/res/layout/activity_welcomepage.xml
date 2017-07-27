@@ -19,11 +19,4 @@
         android:layout_weight="0.20"
         tools:ignore="HardcodedText" />
 
-    <Button
-        android:id="@+id/register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_weight="0.20"
-        tools:ignore="HardcodedText" />
 </LinearLayout>

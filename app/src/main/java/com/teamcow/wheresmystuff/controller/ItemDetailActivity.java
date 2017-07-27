@@ -11,6 +11,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -146,13 +147,13 @@ public class ItemDetailActivity extends AppCompatActivity implements OnMapReadyC
 
     private void setIcons() {
         if (lostItem.getType().equals(ItemType.CLOTHES)) {
-            categoryImage.setImageDrawable(getResources().getDrawable(R.drawable.clothing_icon_360, null));
+            categoryImage.setImageDrawable(getResources().getDrawable(R.drawable.black_clothingicon, null));
         } else if (lostItem.getType().equals(ItemType.ELECTRONIC)) {
-            categoryImage.setImageDrawable(getResources().getDrawable(R.drawable.electornic_icon_360, null));
+            categoryImage.setImageDrawable(getResources().getDrawable(R.drawable.black_electronicsicon, null));
         } else if (lostItem.getType().equals(ItemType.JEWELRY)) {
-            categoryImage.setImageDrawable(getResources().getDrawable(R.drawable.jewelry_icon_360, null));
+            categoryImage.setImageDrawable(getResources().getDrawable(R.drawable.black_jewlryicon, null));
         } else if (lostItem.getType().equals(ItemType.TOILETRY)) {
-            categoryImage.setImageDrawable(getResources().getDrawable(R.drawable.toiletries_icon_360, null));
+            categoryImage.setImageDrawable(getResources().getDrawable(R.drawable.black_toiletryicon, null));
         }
         if (lostItem.getPoster().equals(PosterType.FINDER)) {
             posterImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_found_item_black_24dp, null));

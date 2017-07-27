@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.teamcow.wheresmystuff.R;
 import com.teamcow.wheresmystuff.model.ItemType;
 import com.teamcow.wheresmystuff.model.LostItem;
@@ -46,7 +50,9 @@ public class ItemSearchActivity extends AppCompatActivity {
     private ItemType itemType;
     private android.widget.SearchView searchView;
     private MenuItem searchItem;
+    private MenuItem refreshOption;
     private SearchManager searchManager;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private static final int RESULT_CODE_EDIT = 101;
 
@@ -58,6 +64,15 @@ public class ItemSearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_search);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
 
         lostList = lid.getItemList();
 
@@ -137,12 +152,23 @@ public class ItemSearchActivity extends AppCompatActivity {
         } else {
             showList = lostList;
         }
-        mRecyclerView = (RecyclerView) findViewById(R.id.item_search_recyclerview);
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.item_search_recyclerview);
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+//        mAdapter = new FirebaseRecyclerAdapter<LostItem, DataHolder>(
+//                LostItem.class,
+//
+//        ) {
+//            @Override
+//            protected void populateViewHolder(RecyclerView.ViewHolder viewHolder, Object model, int position) {
+//
+//            }
+//        }
 
         mAdapter = new DataAdapter(showList);
         mRecyclerView.setAdapter(mAdapter);
@@ -173,6 +199,20 @@ public class ItemSearchActivity extends AppCompatActivity {
         searchView.setIconifiedByDefault(false);
         searchView.requestFocus();
 
+        refreshOption = menu.findItem(R.id.menu_refresh);
+
+
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_refresh:
+                refresh();
+                return true;
+        }
         return true;
     }
 
@@ -397,5 +437,17 @@ public class ItemSearchActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         finish();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refresh();
+    }
+
+    private void refresh() {
+        lostList = lid.getItemList();
+        handleIntent(getIntent());
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }
