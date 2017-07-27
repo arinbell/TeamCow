@@ -1,9 +1,11 @@
 package com.teamcow.wheresmystuff.controller;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.icu.text.SimpleDateFormat;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.ContactsContract;
@@ -20,8 +22,16 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.provider.MediaStore;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,7 +58,7 @@ import java.util.Date;
  * A page where users can register items.
  */
 @SuppressWarnings("ALL")
-public class ItemRegActivity extends AppCompatActivity {
+public class ItemRegActivity extends AppCompatActivity implements OnMapReadyCallback{
     private LostItemData lid = LostItemData.getInstance();
     private EditText itemNF;
     private EditText itemDF;
@@ -66,6 +76,10 @@ public class ItemRegActivity extends AppCompatActivity {
     private double x_coord;
     private double y_coord;
     private boolean uriChanged = false;
+
+    private GoogleMap mMap;
+    private MapView mapView;
+    private Marker mapMarker;
 
     private final int REQUEST_CODE_PLACEPICKER = 1;
     private final int REQUEST_PICK_IMAGE = 2;
@@ -92,6 +106,9 @@ public class ItemRegActivity extends AppCompatActivity {
         itemTypeSpinner = (Spinner)findViewById(R.id.item_type_spinner);
         posterTypeSpinner = (Spinner)findViewById(R.id.poster_type_spinner);
         imageView = (ImageView) findViewById(R.id.item_reg_imageView);
+        mapView = (MapView) findViewById(R.id.mapView);
+        mapView.getMapAsync(this);
+
 
         itemLocText = (EditText)findViewById(R.id.address_field);
         itemLocText.setFocusable(false);
@@ -174,6 +191,33 @@ public class ItemRegActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        showMarker();
+    }
+
+
+    private void showMarker() {
+
+        if (itemLocation == null) {
+            mapMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("No where"));
+        } else {
+            if (mapMarker == null) {
+                mapMarker = mMap.addMarker(
+                        new MarkerOptions()
+                        .position(itemLocation.getLatLng())
+                        .title("Location")
+                );
+            } else {
+                mapMarker.setPosition(itemLocation.getLatLng());
+            }
+        }
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(mapMarker.getPosition()));
+    }
+
     /**
      * adds a new item to a preexisting list of items
      */
@@ -344,6 +388,7 @@ public class ItemRegActivity extends AppCompatActivity {
         if (name == null && address == null) {
             itemLocText.setText(x_coord + ", " + y_coord);
         }
+        showMarker();
     }
 
     private void selectImage() {
