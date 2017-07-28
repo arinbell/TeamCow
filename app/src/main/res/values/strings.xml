@@ -123,4 +123,5 @@
     <string name="search_title">Search</string>
     <string name="search_hint">Search Postings</string>
     <string name="menu_refresh">Refresh</string>
+    <string name="delete_setting">Delete</string>
 </resources>

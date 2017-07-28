@@ -1,5 +1,6 @@
 package com.teamcow.wheresmystuff.controller;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,14 +8,18 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,8 +38,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.teamcow.wheresmystuff.R;
@@ -48,6 +57,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ItemDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -65,6 +75,7 @@ public class ItemDetailActivity extends AppCompatActivity implements OnMapReadyC
     private Marker mMarker;
     private ImageView itemImageview;
     private CollapsingToolbarLayout toolbarLayout;
+    private MenuItem deleteOption;
 
 
     private final String INTENT_ITEM = "item_to_view";
@@ -122,6 +133,28 @@ public class ItemDetailActivity extends AppCompatActivity implements OnMapReadyC
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        if (lostItem.getUser().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+            getMenuInflater().inflate(R.menu.item_detail_menu, menu);
+
+            deleteOption = menu.findItem(R.id.menu_refresh);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete_setting:
+                deletePost();
+                return true;
+        }
+        return true;
+    }
+
     private void fillDisplay() {
         //Log.d("WheresMyStuff", "FILLDISPLAY REQACHEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
         //itemImageview.setImageDrawable(ImageHandler.loadImageFromURL(this, lostItem.getUri()));
@@ -143,6 +176,24 @@ public class ItemDetailActivity extends AppCompatActivity implements OnMapReadyC
         setIcons();
         mapView.getMapAsync(this);
         //Log.d("WheresMyStuff", "FILLDISPLAY LEAVINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+    }
+
+    private void deletePost() {
+        StorageReference deleteRef = FirebaseStorage.getInstance().getReferenceFromUrl(lostItem.getUri());
+        deleteRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("WheresMyStuff", "Remote image deleted successfully");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("WheresMyStuff", "Remote image deletion failed");
+            }
+        });
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("lostitems").child(lostItem.getId());
+        ref.removeValue();
+        finish();
     }
 
     private void setIcons() {

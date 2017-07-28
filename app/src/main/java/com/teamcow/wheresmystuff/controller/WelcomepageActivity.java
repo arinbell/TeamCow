@@ -39,9 +39,9 @@ public class WelcomepageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcomepage);
 
-        SharedPreferences mPrefs =
-                getSharedPreferences(GLOBAL_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor pEditor = mPrefs.edit();
+//        SharedPreferences mPrefs =
+//                getSharedPreferences(GLOBAL_PREFS, MODE_PRIVATE);
+//        SharedPreferences.Editor pEditor = mPrefs.edit();
 
 //        Gson gson = new Gson();
 //        String json = mPrefs.getString("UserData", "");
@@ -68,14 +68,14 @@ public class WelcomepageActivity extends AppCompatActivity {
                                         new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
                                         new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
                                         new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build()))
-                            .setLogo(R.drawable.wheres_my_stuff_logo_black_720)
+                            //.setLogo(R.drawable.wheres_my_stuff_logo_black_720)
                             .setIsSmartLockEnabled(false)
-                            .setLogo(R.drawable.logo_black_720)
+//                            .setLogo(R.drawable.logo_black_720)
                             .build(),
                         RC_SIGN_IN);
 
-                //Intent intent = new Intent(WelcomepageActivity.this, LoginActivity.class);
-                //startActivity(intent);
+//                Intent intent = new Intent(WelcomepageActivity.this, LoginActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -103,7 +103,7 @@ public class WelcomepageActivity extends AppCompatActivity {
     private void handleSignInResponse(int resultCode, Intent data, IdpResponse response) {
 
         if (resultCode == ResultCodes.OK) {
-            startActivity(HomepageActivity.createIntent(this, IdpResponse.fromResultIntent(data)));
+            Intent intent = new Intent(WelcomepageActivity.this, HomepageActivity.class);
             finish();
             return;
         } else {

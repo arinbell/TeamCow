@@ -64,13 +64,13 @@ public class HomepageActivity extends AppCompatActivity {
         });
     }
 
-    public static Intent createIntent(
-            Context context,
-            IdpResponse idpResponse) {
-        Intent startIntent = idpResponse == null ? new Intent() : idpResponse.toIntent();
-
-        return startIntent.setClass(context, HomepageActivity.class);
-    }
+//    public static Intent createIntent(
+//            Context context,
+//            IdpResponse idpResponse) {
+//        Intent startIntent = idpResponse == null ? new Intent() : idpResponse.toIntent();
+//
+//        return startIntent.setClass(context, HomepageActivity.class);
+//    }
 
     /**
      * Allows user to exit homepage.
